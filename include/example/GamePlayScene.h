@@ -4,7 +4,9 @@
 #include "ruru/IScene.h"
 #include "ruru/entity/EntityManager.h"
 #include "ruru/events/LoggedEventService.h"
+#include "ruru/particles/ParticleManager.h"
 #include "ruru/services/ServiceLocator.h"
+
 
 #include "example/particles/ExplosionParticle.h"
 
@@ -12,6 +14,7 @@
 #include "example/systems/CollisionSystem.h"
 
 #include <vector>
+#include <allegro5/allegro.h>
 
 class GamePlayScene : public RuRu::IScene
 {
@@ -19,12 +22,13 @@ class GamePlayScene : public RuRu::IScene
 		RuRu::LoggedEventService m_EventService;
 		RuRu::EntityManager m_EntityManager;
 		RuRu::EntityHandle_t m_Player;
+		RuRu::ParticleManager<ExplosionParticle> m_ExplosionParticles;
 		EntitySpawner m_Spawner;
 		CollisionSystem m_CollisionSystem;
-		std::vector<ExplosionParticle> particles;
+		ALLEGRO_BITMAP* m_ParticleBuffer;
 
-		double m_ScreenWidth;
-		double m_ScreenHeight;
+		int m_ScreenWidth;
+		int m_ScreenHeight;
 
 	public:
 		GamePlayScene();
@@ -37,6 +41,7 @@ class GamePlayScene : public RuRu::IScene
 		virtual void draw(RuRu::Game* game);
 
 		void explosionParticleSpawner(const RuRu::Event* args);
+		void enemySpawner(const RuRu::Event* args);
 };
 
 

@@ -55,7 +55,6 @@ class EntityDestroyEvent : public RuRu::Event
 			ss << ", entityId=" << entityId;
 			ss << ", entityType=" << entityType;
 			ss << ", at=(" << x << ", " << y << ")]";
-			
 
 			return ss.str();
 		}

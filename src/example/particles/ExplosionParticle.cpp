@@ -12,7 +12,7 @@ bool ExplosionParticle::update()
 	return (m_Life > 0);
 }
 
-void ExplosionParticle::render()
+void ExplosionParticle::render() const
 {
 	al_put_pixel((int)m_X, (int)m_Y, m_Color);
 }

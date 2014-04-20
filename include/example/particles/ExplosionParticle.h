@@ -17,7 +17,7 @@ class ExplosionParticle
 		ExplosionParticle(double x, double y, double speedX, double speedY, int life, ALLEGRO_COLOR color);
 
 		bool update();
-		void render();
+		void render() const;
 };
 
 #endif

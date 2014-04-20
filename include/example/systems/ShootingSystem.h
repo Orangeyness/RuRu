@@ -9,9 +9,7 @@
 class ShootingSystem
 {
 	public:
-		static void Shoot(	RuRu::ComponentIterator<ShootingComponent> begin,
-							RuRu::ComponentIterator<ShootingComponent> end,
-							EntitySpawner& es);
+		static void Shoot(RuRu::EntityManager& em);
 
 };
 

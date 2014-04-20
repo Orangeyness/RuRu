@@ -11,7 +11,7 @@ typedef size_t ComponentType_t;
 typedef int ComponentHandle_t;
 
 const ComponentHandle_t COMPONENT_NULL_HANDLE = -1;
-const size_t COMPONENT_DEFAULT_ALLOCATION = 100;
+const size_t COMPONENT_DEFAULT_ALLOCATION = 1000;
 const size_t COMPONENT_TYPE_COUNT = 100;
 
 NS_RURU_END

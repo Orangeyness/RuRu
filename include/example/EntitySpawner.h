@@ -21,8 +21,6 @@ class EntitySpawner
 		EntitySpawner(RuRu::EntityManager* em);
 
 		EntityHandle_t spawnPlayer(double x, double y);
-		EntityHandle_t spawnPlayerBullet(double x, double y);
-		EntityHandle_t spawnEnemyBullet(double x, double y);
 		EntityHandle_t spawnEnemy(double x, double y);
 };
 
