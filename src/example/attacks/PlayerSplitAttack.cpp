@@ -13,7 +13,7 @@ PlayerSplitAttack::PlayerSplitAttack() { }
 
 int PlayerSplitAttack::getReloadTime() const 
 {
-	return 1;
+	return 10;
 }
 
 int PlayerSplitAttack::getAttackType() const

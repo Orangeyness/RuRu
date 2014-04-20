@@ -10,10 +10,13 @@
 #include "example/components/ShootingComponent.h"
 #include "example/components/DamageDealingComponent.h"
 #include "example/components/DamageableComponent.h"
+#include "example/components/BuffableComponent.h"
 
 #include "example/attacks/PlayerStandardAttack.h"
 #include "example/attacks/PlayerSplitAttack.h"
 #include "example/attacks/EnemyStandardAttack.h"
+
+#include "example/buffs/SplitAttackBuff.h"
 
 EntitySpawner::EntitySpawner(RuRu::EntityManager* em)
 	: m_Em(em) { }
@@ -31,9 +34,10 @@ EntityHandle_t EntitySpawner::spawnPlayer(double x, double y)
 	m_Em->addComponent<DamageableComponent>(entity, PLAYER_TEAM, 500);
 
 	m_Em->addComponent<ShootingComponent>(entity, m_Em->getComponentAccessor<PositionComponent>(entity), PLAYER_TEAM)
-		->addAttack(IAttack::instance<PlayerStandardAttack>())
-		->addAttack(IAttack::instance<PlayerSplitAttack>());
+		->addAttack(IAttack::instance<PlayerStandardAttack>());
 
+	m_Em->addComponent<BuffableComponent>(entity, entity)
+		->addBuff(*m_Em, IBuff::instance<SplitAttackBuff>());
 
 	return entity;
 }

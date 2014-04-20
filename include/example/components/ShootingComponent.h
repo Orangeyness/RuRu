@@ -39,7 +39,7 @@ class ShootingComponent
 
 		ShootingComponent(RuRu::ComponentAccessor<PositionComponent> position, int team);
 		ShootingComponent* addAttack(IAttack* attack);
-		void disableAttack(int attackSlot);
+		void disableAttack(IAttack* attack);
 		void shoot(RuRu::EntityManager& em);
 };
 

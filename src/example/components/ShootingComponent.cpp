@@ -2,8 +2,8 @@
 
 ShootingComponent::ShootingComponent(RuRu::ComponentAccessor<PositionComponent> position, int team)
 	: 	m_Position(position), 
-		active(true) 
-{ }
+		m_Attacks(),
+		active(true) { }
 
 ShootingComponent* ShootingComponent::addAttack(IAttack* attack)
 {
@@ -14,9 +14,9 @@ ShootingComponent* ShootingComponent::addAttack(IAttack* attack)
 	return this;
 }
 
-void ShootingComponent::disableAttack(int attackSlot)
+void ShootingComponent::disableAttack(IAttack* attack)
 {
-	m_Attacks[attackSlot].Active = false;
+	m_Attacks[attack->getAttackType()].Active = false;
 }
 
 void ShootingComponent::shoot(RuRu::EntityManager& em)

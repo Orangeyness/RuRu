@@ -9,6 +9,7 @@
 #include "example/components/CollisionComponent.h"
 #include "example/components/DamageDealingComponent.h"
 #include "example/components/DamageableComponent.h"
+#include "example/components/BuffableComponent.h"
 
 #include "example/events/EntityDestroyEvent.h"
 
@@ -81,6 +82,13 @@ void GamePlayScene::update(RuRu::Game* game)
 
 	MovementSystem::Move(m_EntityManager);
 	MovementSystem::BoundryCheck(m_EntityManager, m_ScreenWidth, m_ScreenHeight);
+
+	for (auto& e : m_EntityManager)
+	{
+		if (! e.hasComponent<BuffableComponent>()) continue;
+
+		e.getComponent<BuffableComponent>()->ageBuffs(m_EntityManager);		
+	}
 
 	m_CollisionSystem.resolveCollisions(m_EntityManager);
 	m_EntityManager.deleteFlaggedEntities();
