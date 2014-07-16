@@ -1,7 +1,7 @@
 #ifndef H_IBUFF
 #define H_IBUFF
 
-#include "ruru/entity/EntityManager.h"
+#include "ruru/entities/EntityManager.h"
 
 class IBuff
 {
@@ -17,7 +17,6 @@ class IBuff
 		virtual void unbind(RuRu::EntityManager& em, RuRu::EntityHandle_t entityToDebuff) = 0;
 		virtual int getBuffType() = 0;
 		virtual int getLifeTime() = 0;
-
 };
 
 

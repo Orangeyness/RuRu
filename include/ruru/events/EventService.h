@@ -4,9 +4,8 @@
 #include "ruru/RuRu.h"
 #include "ruru/events/EventTypes.h"
 
-#include "ruru/services/IService.h"
+#include "ruru/services/ServiceMixin.h"
 #include "ruru/services/ServiceLocator.h"
-#include "ruru/services/ServiceTypes.h"
 
 #include <functional>
 #include <forward_list>
@@ -19,7 +18,7 @@ typedef std::pair<EventDelegateHandle_t, EventDelegate> EventDelegateAndIdTuple;
 typedef std::forward_list<EventDelegateAndIdTuple> EventDelegateList;
 typedef std::pair<EventType_t, Event*> EventAndTypeTuple;
 
-class EventService : public IService
+class EventService : public ServiceMixin<EventService>
 {
 	friend ServiceLocator;
 
@@ -27,8 +26,6 @@ class EventService : public IService
 		static EventDelegateHandle_t NextId;
 
 	protected:
-		constexpr static const ServiceType_t Type = SERVICE_EVENT_SERVICE_ID;
-
 		std::array<EventDelegateList, EVENT_TYPE_COUNT> m_EventDelegates;
 		std::forward_list<EventAndTypeTuple> m_Events;
 

@@ -1,8 +1,8 @@
 set(ENGINE_FILES
 	Game.cpp
 	Config.cpp
-	entity/EntityManager.cpp
 	services/ServiceLocator.cpp
+	services/ServiceMixin.cpp
 	events/EventService.cpp
 	particles/ParticleManager.cpp
 	)

@@ -1,6 +1,7 @@
 #ifndef H_COMPONENT_TYPES
 #define H_COMPONENT_TYPES
 
+#include "ruru/components/ComponentMixin.h"
 #include "ruru/components/ComponentTypes.h"
 
 #define COMPONENT_TYPE_POSITION 			0
@@ -14,5 +15,7 @@
 #define COMPONENT_TYPE_DAMAGEABLE			8
 #define COMPONENT_TYPE_ENTITY_IDENTIFIER 	9
 #define COMPONENT_TYPE_BUFFABLE				10
+#define COMPONENT_TYPE_BUFFHOLDER			11
+#define COMPONENT_TYPE_LIFETIME				12
 
 #endif

@@ -1,9 +1,10 @@
 #ifndef H_POSITION_COMPONENT
 #define H_POSITION_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 
-class PositionComponent
+class PositionComponent : public RuRu::ComponentMixin
 {
 	public:
 		constexpr static const RuRu::ComponentType_t Type = COMPONENT_TYPE_POSITION;

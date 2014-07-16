@@ -23,7 +23,7 @@ Game::Game(Config* config)
 	m_RedrawTimer = NULL;
 
 	//Register Services
-	ServiceLocator::AddService<IDataService>(&m_DataService);
+	m_ServiceLocator.add<IDataService>(&m_DataService);
 }
 
 Game::~Game()
@@ -40,7 +40,7 @@ Game::~Game()
 		m_SceneStack.pop();
 	}
 
-	ServiceLocator::RemoveService<IDataService>(&m_DataService);
+	m_ServiceLocator.remove<IDataService>();
 }
 
 void Game::initialise()
@@ -252,4 +252,9 @@ void Game::calculateFrameRate()
 
 		std::cout << m_LastFrameRate << std::endl;
 	}
+}
+
+ServiceLocator* Game::getServices()
+{
+	return &m_ServiceLocator;
 }

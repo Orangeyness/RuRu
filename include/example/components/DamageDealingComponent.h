@@ -1,9 +1,10 @@
 #ifndef H_DAMAGE_DEALING_COMPONENT
 #define H_DAMAGE_DEALING_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 
-class DamageDealingComponent
+class DamageDealingComponent : public RuRu::ComponentMixin
 {
 	private:
 		int m_Damage;

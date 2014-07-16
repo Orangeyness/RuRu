@@ -1,11 +1,12 @@
 #ifndef H_ENTITY_IDENTIFIER_COMPONENT
 #define H_ENTITY_IDENTIFIER_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 
 typedef size_t EntityTypeId_t;
 
-class EntityIdentifierComponent
+class EntityIdentifierComponent : public RuRu::ComponentMixin
 {
 	private:
 		EntityTypeId_t m_EntityType;

@@ -1,12 +1,18 @@
 #ifndef H_RENDER_SYSTEM
 #define H_RENDER_SYSTEM
 
-#include "ruru/entity/EntityManager.h"
+#include "ruru/systems/SystemMixin.h"
 
-class RenderSystem
+#include "example/components/PositionComponent.h"
+#include "example/components/RenderComponent.h"
+
+class RenderSystem : public RuRu::SystemMixin<RenderSystem, PositionComponent, RenderComponent>
 {
 	public:
-		static void Run(const RuRu::EntityManager& entityManager);
+		void runSingle(RuRu::EntityManager& entityManager, const RuRu::ServiceLocator& sl,
+				PositionComponent& pc, RenderComponent& rc);
+
+		using RuRu::SystemMixin<RenderSystem, PositionComponent, RenderComponent>::run;
 };
 
 

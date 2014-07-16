@@ -1,10 +1,11 @@
 #ifndef H_PHYSICS_COMPONENT
 #define H_PHYSICS_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 #include "example/components/PositionComponent.h"
 
-class PhysicsComponent
+class PhysicsComponent : public RuRu::ComponentMixin
 {
 	private:
 		double m_SpeedMax;
@@ -22,7 +23,7 @@ class PhysicsComponent
 
 		PhysicsComponent(double speedMax, double acceleration, double friction);
 
-		void update(PositionComponent* position);
+		void update(PositionComponent& position);
 		void accelerate(double x, double y);
 		void accelerateX(double x);
 		void accelerateY(double y);

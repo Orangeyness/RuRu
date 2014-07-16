@@ -1,24 +1,31 @@
 #ifndef H_COLLISION_SYSTEM
 #define H_COLLISION_SYSTEM
 
-#include "ruru/entity/EntityManager.h"
+#include "ruru/entities/EntityManager.h"
+#include "ruru/services/ServiceLocator.h"
+#include "ruru/systems/SystemMixin.h"
 
 #include "example/components/CollisionComponent.h"
 
 #include <forward_list>
 #include <utility>
 
-class CollisionSystem
+class CollisionSystem : public RuRu::PairWiseSystemMixin<CollisionSystem, CollisionComponent>
 {
-
-	protected:
+	private:
 		std::forward_list<std::pair<RuRu::EntityHandle_t, RuRu::EntityHandle_t>> m_CollisionList;
 
-		void detectCollisions(RuRu::ComponentIteratorConst<CollisionComponent> begin, RuRu::ComponentIteratorConst<CollisionComponent> end);
-	public:
-		void resolveCollisions(RuRu::EntityManager& em);
-		void resolveCollision(RuRu::EntityManager& em, RuRu::Entity* entity, RuRu::Entity* collider);
+	protected:
+		void resolveCollision(RuRu::EntityManager& em, 
+			const RuRu::ServiceLocator& sl, RuRu::Entity& entity, RuRu::Entity& collider);
 
+	public:
+		void runSingle(RuRu::EntityManager& em, const RuRu::ServiceLocator& sl, 
+			CollisionComponent& first, CollisionComponent& second);
+
+		void after(RuRu::EntityManager& em, const RuRu::ServiceLocator& sl);
+
+		using RuRu::PairWiseSystemMixin<CollisionSystem, CollisionComponent>::run;
 };
 
 

@@ -1,11 +1,12 @@
 #ifndef H_BOUNDRY_CHECK_COMPONENT
 #define H_BOUNDRY_CHECK_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 
 typedef bool BoundryBehaviour_t;
 
-class BoundryCheckComponent
+class BoundryCheckComponent : public RuRu::ComponentMixin
 {
 	private:
 		BoundryBehaviour_t m_Behaviour;

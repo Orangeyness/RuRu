@@ -27,28 +27,25 @@ void PlayerSplitAttack::cast(double x, double y, RuRu::EntityManager& em) const
 
 	entity = em.createEntity();
 	em.addComponent<PositionComponent>(entity, x, y);
-	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0));
+	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0), TRIANGLE_DOWN);
 	em.addComponent<BoundryCheckComponent>(entity, BoundryCheckComponent::DESTROY_ENTITY, true, true, true, true);
-	em.addComponent<CollisionComponent>(entity, em.getComponentAccessor<PositionComponent>(entity), 3.0, 3.0);
-	em.addComponent<PhysicsComponent>(entity, 17, 17, 0)
-		->accelerate(-0.1, -1);
+	em.addComponent<CollisionComponent>(entity, 3.0, 3.0);
+	em.addComponent<PhysicsComponent>(entity, 17, 17, 0).accelerate(-0.1, -1);
 	em.addComponent<DamageDealingComponent>(entity, PLAYER_TEAM, 250, false);
 
 	entity = em.createEntity();
 	em.addComponent<PositionComponent>(entity, x, y);
-	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0));
+	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0), TRIANGLE_DOWN);
 	em.addComponent<BoundryCheckComponent>(entity, BoundryCheckComponent::DESTROY_ENTITY, true, true, true, true);
-	em.addComponent<CollisionComponent>(entity, em.getComponentAccessor<PositionComponent>(entity), 3.0, 3.0);
-	em.addComponent<PhysicsComponent>(entity, 17, 17, 0)
-		->accelerate(0, -1);
+	em.addComponent<CollisionComponent>(entity, 3.0, 3.0);
+	em.addComponent<PhysicsComponent>(entity, 17, 17, 0).accelerate(0, -1);
 	em.addComponent<DamageDealingComponent>(entity, PLAYER_TEAM, 250, false);
 
 	entity = em.createEntity();
 	em.addComponent<PositionComponent>(entity, x, y);
-	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0));
+	em.addComponent<RenderComponent>(entity, 3, al_map_rgb(200, 160, 0), TRIANGLE_DOWN);
 	em.addComponent<BoundryCheckComponent>(entity, BoundryCheckComponent::DESTROY_ENTITY, true, true, true, true);
-	em.addComponent<CollisionComponent>(entity, em.getComponentAccessor<PositionComponent>(entity), 3.0, 3.0);
-	em.addComponent<PhysicsComponent>(entity, 17, 17, 0)
-		->accelerate(0.1, -1);
+	em.addComponent<CollisionComponent>(entity, 3.0, 3.0);
+	em.addComponent<PhysicsComponent>(entity, 17, 17, 0).accelerate(0.1, -1);
 	em.addComponent<DamageDealingComponent>(entity, PLAYER_TEAM, 250, false);
 }

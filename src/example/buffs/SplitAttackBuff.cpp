@@ -11,9 +11,9 @@ void SplitAttackBuff::bind(RuRu::EntityManager& em, RuRu::EntityHandle_t entityT
 
 	if (e->hasComponent<ShootingComponent>())
 	{
-		ShootingComponent* sc = e->getComponent<ShootingComponent>();
+		ShootingComponent& sc = e->getComponent<ShootingComponent>();
 		
-		sc->addAttack(IAttack::instance<PlayerSplitAttack>());
+		sc.addAttack(IAttack::instance<PlayerSplitAttack>());
 	}
 }
 
@@ -24,9 +24,9 @@ void SplitAttackBuff::unbind(RuRu::EntityManager& em, RuRu::EntityHandle_t entit
 
 	if (e->hasComponent<ShootingComponent>())
 	{
-		ShootingComponent* sc = e->getComponent<ShootingComponent>();
+		ShootingComponent& sc = e->getComponent<ShootingComponent>();
 		
-		sc->disableAttack(IAttack::instance<PlayerSplitAttack>());
+		sc.disableAttack(IAttack::instance<PlayerSplitAttack>());
 	}
 }
 

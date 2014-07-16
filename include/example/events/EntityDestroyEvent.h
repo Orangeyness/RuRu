@@ -1,7 +1,7 @@
 #ifndef H_ENTITY_DESTROY_EVENT
 #define H_ENTITY_DESTROY_EVENT
 
-#include "ruru/entity/Entity.h"
+#include "ruru/entities/Entity.h"
 #include "example/EntitySpawner.h"
 #include "example/events/EventTypes.h"
 #include "example/components/EntityIdentifierComponent.h"
@@ -19,15 +19,15 @@ class EntityDestroyEvent : public RuRu::Event
 		double x;
 		double y;
 
-		EntityDestroyEvent(RuRu::Entity* entity)
+		EntityDestroyEvent(RuRu::Entity& entity)
 		{
-			entityId = entity->getEntityId();
+			entityId = entity.getEntityId();
 		
-			if (entity->hasComponent<EntityIdentifierComponent>())
+			if (entity.hasComponent<EntityIdentifierComponent>())
 			{
-				EntityIdentifierComponent* ident = entity->getComponent<EntityIdentifierComponent>();
+				EntityIdentifierComponent& ident = entity.getComponent<EntityIdentifierComponent>();
 
-				entityType = ident->type();
+				entityType = ident.type();
 			}
 			else
 			{
@@ -35,11 +35,11 @@ class EntityDestroyEvent : public RuRu::Event
 			}
 		
 
-			if (entity->hasComponent<PositionComponent>())
+			if (entity.hasComponent<PositionComponent>())
 			{
-				PositionComponent* pos = entity->getComponent<PositionComponent>();
-				x = pos->x;
-				y = pos->y;
+				PositionComponent& pos = entity.getComponent<PositionComponent>();
+				x = pos.x;
+				y = pos.y;
 			}
 			else
 			{

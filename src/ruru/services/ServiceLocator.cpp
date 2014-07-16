@@ -1,4 +1,5 @@
 #include "ruru/services/ServiceLocator.h"
-using namespace RuRu;
+#include "ruru/services/ServiceMixin.h"
 
-std::unordered_map<ServiceType_t, IService*> ServiceLocator::m_Services;
+RuRu::ServiceType_t RuRu::ServiceLocator::NextId = RuRu::SERVICE_IDENTIFIER_NOT_SET + 1;
+

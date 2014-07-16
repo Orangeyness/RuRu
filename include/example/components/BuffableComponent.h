@@ -1,6 +1,7 @@
 #ifndef H_BUFFABLE_COMPONENT
 #define H_BUFFABLE_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 #include "example/buffs/IBuff.h"
 
@@ -22,7 +23,7 @@ struct BuffData
 	IBuff* Handle;
 };
 
-class BuffableComponent
+class BuffableComponent : public RuRu::ComponentMixin
 {
 	private:
 		std::array<BuffData, BUFF_SLOTS> m_Buffs;

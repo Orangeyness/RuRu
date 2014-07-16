@@ -1,7 +1,7 @@
 #ifndef H_IATTACK
 #define H_IATTACK
 
-#include "ruru/entity/EntityManager.h"
+#include "ruru/entities/EntityManager.h"
 
 class IAttack
 {

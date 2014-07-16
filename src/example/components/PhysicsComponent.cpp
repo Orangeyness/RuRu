@@ -27,13 +27,13 @@ double PhysicsComponent::limitSpeed(double speed)
 	return speed;
 }
 
-void PhysicsComponent::update(PositionComponent* position)
+void PhysicsComponent::update(PositionComponent& position)
 {
 	m_SpeedX = updateSpeed(m_SpeedX);
 	m_SpeedY = updateSpeed(m_SpeedY);
 
-	position->x += m_SpeedX;
-	position->y += m_SpeedY;
+	position.x += m_SpeedX;
+	position.y += m_SpeedY;
 }
 
 void PhysicsComponent::accelerateX(double x)

@@ -11,6 +11,7 @@ set (GAME_FILES
 	systems/RenderSystem.cpp
 	systems/ShootingSystem.cpp
 	systems/CollisionSystem.cpp
+	systems/LifeTimeSystem.cpp
 	particles/ExplosionParticle.cpp
 	attacks/PlayerStandardAttack.cpp
 	attacks/PlayerSplitAttack.cpp

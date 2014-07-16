@@ -1,8 +1,7 @@
 #include "example/components/ShootingComponent.h"
 
-ShootingComponent::ShootingComponent(RuRu::ComponentAccessor<PositionComponent> position, int team)
-	: 	m_Position(position), 
-		m_Attacks(),
+ShootingComponent::ShootingComponent(int team)
+	:	m_Attacks(),
 		active(true) { }
 
 ShootingComponent* ShootingComponent::addAttack(IAttack* attack)
@@ -29,7 +28,9 @@ void ShootingComponent::shoot(RuRu::EntityManager& em)
 		
 		if (active && attack.ReloadTime < 0)
 		{
-			attack.Handle->cast(m_Position->x, m_Position->y, em);
+			PositionComponent& position = getSiblingComponent<PositionComponent>();
+
+			attack.Handle->cast(position.x, position.y, em);
 			attack.ReloadTime = attack.Handle->getReloadTime();
 		}
 	}

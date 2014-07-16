@@ -1,9 +1,10 @@
 #ifndef H_DAMAGEABLE_COMPONENT
 #define H_DAMAGEABLE_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 	
-class DamageableComponent
+class DamageableComponent : public RuRu::ComponentMixin
 {
 	private:
 		int m_MaxDamageCapacity;

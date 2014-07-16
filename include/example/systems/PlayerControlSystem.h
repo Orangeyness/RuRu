@@ -1,7 +1,7 @@
 #ifndef H_PLAYER_CONTROL_SYSTEM
 #define H_PLAYER_CONTROL_SYSTEM
 
-#include "ruru/entity/Entity.h"
+#include "ruru/entities/Entity.h"
 
 class PlayerControlSystem
 {

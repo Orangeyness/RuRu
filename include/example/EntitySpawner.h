@@ -1,7 +1,8 @@
 #ifndef H_ENTITY_SPAWNER
 #define H_ENTITY_SPAWNER
 
-#include "ruru/entity/EntityManager.h"
+#include "ruru/entities/EntityManager.h"
+#include "example/buffs/IBuff.h"
 
 #define PLAYER_TEAM 0 
 #define ENEMY_TEAM 1
@@ -22,6 +23,7 @@ class EntitySpawner
 
 		EntityHandle_t spawnPlayer(double x, double y);
 		EntityHandle_t spawnEnemy(double x, double y);
+		EntityHandle_t spawnBuff(double x, double y, IBuff* buff);
 };
 
 

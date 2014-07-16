@@ -2,18 +2,14 @@
 #define H_IDATA_SERVICE
 
 #include "ruru/RuRu.h"
-#include "ruru/services/IService.h"
+#include "ruru/services/ServiceMixin.h"
 #include "ruru/services/ServiceLocator.h"
-#include "ruru/services/ServiceTypes.h"
 
 NS_RURU_BEGIN
 
-class IDataService : public IService
+class IDataService : public ServiceMixin<IDataService>
 {
 	friend ServiceLocator;
-
-	protected:
-		constexpr static const ServiceType_t Type = SERVICE_DATA_TYPE_ID;
 
 	public:
 		virtual int getScreenWidth() = 0;

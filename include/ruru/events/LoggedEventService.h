@@ -16,9 +16,6 @@ class LoggedEventService : public EventService
 		EventService m_Base;
 		std::ostream& m_Output;
 
-	protected:
-		constexpr static const ServiceType_t Type = EventService::Type;
-
 	public:
 		LoggedEventService(std::ostream& output)
 			: m_Base(), m_Output(output) { }

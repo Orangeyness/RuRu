@@ -1,15 +1,12 @@
 #include "example/GamePlayScene.h"
 
-#include "example/systems/PlayerControlSystem.h"
-#include "example/systems/MovementSystem.h"
-#include "example/systems/RenderSystem.h"
-#include "example/systems/ShootingSystem.h"
-
 #include "example/components/ShootingComponent.h"
 #include "example/components/CollisionComponent.h"
 #include "example/components/DamageDealingComponent.h"
 #include "example/components/DamageableComponent.h"
 #include "example/components/BuffableComponent.h"
+
+#include "example/buffs/SplitAttackBuff.h"
 
 #include "example/events/EntityDestroyEvent.h"
 
@@ -18,16 +15,22 @@
 #include <ctime>
 #include <iostream>
 #include <functional>
+
 using std::placeholders::_1;
 
 
-GamePlayScene::GamePlayScene()
-	: m_EventService(std::cout), m_ExplosionParticles(5000), m_Spawner(&m_EntityManager)
+GamePlayScene::GamePlayScene(RuRu::ServiceLocator* engineServices)
+	: 	m_ServiceLocator(engineServices), 
+		m_EventService(std::cout), 
+		m_ExplosionParticles(5000), 
+		m_Spawner(&m_EntityManager)
 {
 	srand(time(NULL));
 
 	m_ScreenWidth = 600;
 	m_ScreenHeight = 960;
+
+	m_BoundrySystem.setDimensions(m_ScreenWidth, m_ScreenHeight);
 
 	al_set_new_bitmap_format(ALLEGRO_PIXEL_FORMAT_ANY_WITH_ALPHA);
 	m_ParticleBuffer = al_create_bitmap(m_ScreenWidth, m_ScreenHeight);
@@ -45,14 +48,14 @@ GamePlayScene::GamePlayScene()
 		std::bind(&GamePlayScene::enemySpawner, this, _1)
 		);
 
-	RuRu::ServiceLocator::AddService<RuRu::LoggedEventService>(&m_EventService);
+	m_ServiceLocator.add<RuRu::LoggedEventService>(&m_EventService);
 }
 
 GamePlayScene::~GamePlayScene()
 {
 	al_destroy_bitmap(m_ParticleBuffer);
 
-	RuRu::ServiceLocator::RemoveService<RuRu::LoggedEventService>(&m_EventService);
+	m_ServiceLocator.remove<RuRu::LoggedEventService>();
 }
 
 void GamePlayScene::pause() { }
@@ -78,19 +81,19 @@ void GamePlayScene::update(RuRu::Game* game)
 
 	PlayerControlSystem::ProcessInput(m_EntityManager.tryGet(m_Player));
 
-	ShootingSystem::Shoot(m_EntityManager);
-
-	MovementSystem::Move(m_EntityManager);
-	MovementSystem::BoundryCheck(m_EntityManager, m_ScreenWidth, m_ScreenHeight);
-
-	for (auto& e : m_EntityManager)
+	m_ShootingSystem.run(m_EntityManager, m_ServiceLocator);
+	m_LifeTimeSystem.run(m_EntityManager, m_ServiceLocator);
+	m_MovementSystem.run(m_EntityManager, m_ServiceLocator);
+	m_BoundrySystem.run(m_EntityManager, m_ServiceLocator);
+	m_CollisionSystem.run(m_EntityManager, m_ServiceLocator);
+	
+	for (RuRu::Entity& e : m_EntityManager)
 	{
 		if (! e.hasComponent<BuffableComponent>()) continue;
 
-		e.getComponent<BuffableComponent>()->ageBuffs(m_EntityManager);		
+		e.getComponent<BuffableComponent>().ageBuffs(m_EntityManager);		
 	}
 
-	m_CollisionSystem.resolveCollisions(m_EntityManager);
 	m_EntityManager.deleteFlaggedEntities();
 	m_ExplosionParticles.update();
 }
@@ -101,6 +104,7 @@ void GamePlayScene::explosionParticleSpawner(const RuRu::Event* args)
 
 	if (event->entityType == ENTITY_PLAYER || event->entityType == ENTITY_ENEMY)
 	{
+
 		int particleCount = rand() % 100 + 100;
 		
 		for (int i = 0; i < particleCount; i++)
@@ -123,6 +127,11 @@ void GamePlayScene::enemySpawner(const RuRu::Event* args)
 
 	if (event->entityType == ENTITY_ENEMY)
 	{
+		if (rand() % 3 == 0)
+		{
+			m_Spawner.spawnBuff(event->x, event->y, IBuff::instance<SplitAttackBuff>());
+		}
+		
 		int enemyCount = 1 + rand() % 2;
 		
 		for (int i = 0; i < enemyCount; i++)
@@ -149,6 +158,6 @@ void GamePlayScene::draw(RuRu::Game* game)
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	al_draw_bitmap(m_ParticleBuffer, 0, 0, 0);
-
-	RenderSystem::Run(m_EntityManager);
+	
+	m_RenderSystem.run(m_EntityManager, m_ServiceLocator);
 }

@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		game.initialise();
-		game.pushScene(new GamePlayScene());
+		game.pushScene(new GamePlayScene(game.getServices()));
 		game.run();
 	}
 	catch(std::runtime_error& e)

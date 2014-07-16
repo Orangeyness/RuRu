@@ -13,7 +13,7 @@ EnemyStandardAttack::EnemyStandardAttack() { }
 
 int EnemyStandardAttack::getReloadTime() const 
 {
-	return 30;
+	return 60;
 }
 
 int EnemyStandardAttack::getAttackType() const
@@ -27,7 +27,7 @@ void EnemyStandardAttack::cast(double x, double y, RuRu::EntityManager& em) cons
 	em.addComponent<PositionComponent>(entity, x, y);
 	em.addComponent<RenderComponent>(entity, 5, al_map_rgb(255, 0, 0));
 	em.addComponent<BoundryCheckComponent>(entity, BoundryCheckComponent::DESTROY_ENTITY, true, true, true, true);
-	em.addComponent<CollisionComponent>(entity, em.getComponentAccessor<PositionComponent>(entity), 5.0, 5.0);
-	em.addComponent<PhysicsComponent>(entity, 15, 15, 0)->accelerateY(1);
+	em.addComponent<CollisionComponent>(entity, 5.0, 5.0);
+	em.addComponent<PhysicsComponent>(entity, 10, 10, 0).accelerateY(1);
 	em.addComponent<DamageDealingComponent>(entity, ENEMY_TEAM, 250, false);
 }

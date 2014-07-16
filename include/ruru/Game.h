@@ -23,9 +23,6 @@ class Game
 
 			private:
 				Game& m_Parent;
-			
-			protected:
-				constexpr static const ServiceType_t Type = IDataService::Type;
 
 			public:
 				DataService(Game& parent);
@@ -45,6 +42,7 @@ class Game
 		double m_LastSecondTime;
 		bool m_GameActive;
 		std::stack<IScene*> m_SceneStack;
+		ServiceLocator m_ServiceLocator;
 
 		// Allegro controls
 		ALLEGRO_DISPLAY* 		m_Display;
@@ -68,6 +66,8 @@ class Game
 		void changeScene(IScene* state);
 		void quit();
 	
+		ServiceLocator* getServices();
+
 		ALLEGRO_BITMAP* screen();
 };
 

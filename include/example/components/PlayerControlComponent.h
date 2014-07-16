@@ -1,9 +1,10 @@
 #ifndef H_PLAYER_CONTROL_COMPONENT
 #define H_PLAYER_CONTROL_COMPONENT
 
+#include "ruru/components/ComponentMixin.h"
 #include "example/components/ComponentTypes.h"
 
-class PlayerControlComponent 
+class PlayerControlComponent : public RuRu::ComponentMixin
 {
 	public:
 		constexpr static const RuRu::ComponentType_t Type = COMPONENT_TYPE_PLAYER_CONTROL;
